@@ -32,6 +32,4 @@ fp-info-cache
 *.step
 *.lck
 .vscode/*
-*.BIN
-*.bin
-card.png
+*.wrl

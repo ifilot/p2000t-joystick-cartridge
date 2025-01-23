@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "atari")(type "KiCad")(uri "D:/PROGRAMMING/P2000T/p2000t-joystick-connector/pcb/components/atari.kicad_sym")(options "")(descr ""))
+)

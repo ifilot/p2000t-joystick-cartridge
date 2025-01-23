@@ -59,3 +59,7 @@ included, allowing easy switching between the stored configurations.
 ![PCB schematic](pcb/p2000t-joystick-slot2-eeprom/p2000t-joystick-slot2-eeprom.svg)
 
 ## Programming the EEPROM
+
+To generate the data for the EEPROM, you can use [this
+script](scripts/eeprom.py). The data can be written to the EEPROM using, for
+example, [this hardware solution](https://github.com/ifilot/pico-sst39sf0x0-programmer).

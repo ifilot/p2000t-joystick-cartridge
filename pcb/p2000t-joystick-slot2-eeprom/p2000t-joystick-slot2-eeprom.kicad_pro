@@ -531,7 +531,7 @@
       "plot": "GERBERS/",
       "pos_files": "",
       "specctra_dsn": "p2000t-joystick-slot2-eeprom.dsn",
-      "step": "",
+      "step": "p2000t-joystick-slot2-eeprom.step",
       "svg": "",
       "vrml": ""
     },

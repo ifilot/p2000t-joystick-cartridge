@@ -43,44 +43,61 @@ KBIEN = (1 << 14)
 
 def main():
     # specify a key-mapping between joystick input and keyboard presses
-    mapping = {
-        'P1_UP': 'UP',
-        'P1_DOWN': 'DOWN',
-        'P1_LEFT': 'LEFT',
-        'P1_RIGHT': 'RIGHT',
-        'P1_FIRE': 'SPACE',
-        'P2_UP': 'NUM8',
-        'P2_DOWN': 'NUM2',
-        'P2_LEFT': 'NUM4',
-        'P2_RIGHT': 'NUM6',
-        'P2_FIRE': 'NUM0',
-    }
-    
-    # show key associations
-    print_mapping(mapping)
-    
+    mappings = [
+        # MAPPING 01
+        {'P1_UP': 'UP',
+         'P1_DOWN': 'DOWN',
+         'P1_LEFT': 'LEFT',
+         'P1_RIGHT': 'RIGHT',
+         'P1_FIRE': 'SPACE',
+         'P2_UP': 'NUM8',
+         'P2_DOWN': 'NUM2',
+         'P2_LEFT': 'NUM4',
+         'P2_RIGHT': 'NUM6',
+         'P2_FIRE': 'NUM0'},
+        # MAPPING 02
+        {'P2_UP': 'UP',
+         'P2_DOWN': 'DOWN',
+         'P2_LEFT': 'LEFT',
+         'P2_RIGHT': 'RIGHT',
+         'P2_FIRE': 'SPACE',
+         'P1_UP': 'NUM8',
+         'P1_DOWN': 'NUM2',
+         'P1_LEFT': 'NUM4',
+         'P1_RIGHT': 'NUM6',
+         'P1_FIRE': 'NUM0'},
+        # MAPPING 03
+        {'P1_UP': 'W',
+         'P1_DOWN': 'S',
+         'P1_LEFT': 'A',
+         'P1_RIGHT': 'D',
+         'P1_FIRE': 'SPACE',
+         'P2_UP': 'NUM8',
+         'P2_DOWN': 'NUM2',
+         'P2_LEFT': 'NUM4',
+         'P2_RIGHT': 'NUM6',
+         'P2_FIRE': 'NUM0'},
+        # MAPPING 04
+        {'P2_UP': 'W',
+         'P2_DOWN': 'S',
+         'P2_LEFT': 'A',
+         'P2_RIGHT': 'D',
+         'P2_FIRE': 'SPACE',
+         'P1_UP': 'NUM8',
+         'P1_DOWN': 'NUM2',
+         'P1_LEFT': 'NUM4',
+         'P1_RIGHT': 'NUM6',
+         'P1_FIRE': 'NUM0'}
+    ]
+        
     # build eeprom data
-    eeprom_data = build_mapping_rom(mapping)
+    data = bytearray()
+    for mapping in mappings:
+        print_mapping(mapping)
+        data.extend(build_mapping_rom(mapping))
     
     with open('joystick_eeprom.bin', 'wb') as f:
-        f.write(bytearray(eeprom_data))
-    
-    test_mapping(eeprom_data, 'P1_UP')
-    test_mapping(eeprom_data, 'P1_DOWN')
-    test_mapping(eeprom_data, 'P1_LEFT')
-    test_mapping(eeprom_data, 'P1_RIGHT')
-    test_mapping(eeprom_data, 'P1_FIRE')
-    
-    # visualize the eeprom_data
-    data =np.array([bin(v).count('1') for v in eeprom_data]).reshape(256,128)
-    plt.figure(dpi=144)
-    plt.imshow(data, origin='lower', cmap='OrRd_r')
-    plt.yticks(np.arange(0, 128, 8) + 4, ['ROW%i' % i for i in range(16)])
-    plt.hlines(np.arange(0, 128, 8)-0.5, 0, 128, linestyle='--', color='black', linewidth=0.5)
-    plt.xticks([])
-    plt.xlim(0,128)
-    plt.ylim(0,128+128//16-0.5)
-    plt.title(r'Joystick $\rightarrow$ Keyboard mapping data')
+        f.write(bytearray(data))
     
 def test_mapping(eeprom_data, pinname):
     """

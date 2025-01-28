@@ -30,7 +30,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            joystick-eeprom.bin
+            joystick_eeprom.bin
           tag_name: nightly
           release_name: Nightly Build
           overwrite: true

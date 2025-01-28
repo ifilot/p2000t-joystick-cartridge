@@ -1,0 +1,38 @@
+name: Nightly Build
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '4 0 * * *'
+
+jobs:
+  nightly-build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # Needed for GitHub Releases
+      actions: write   # Needed for uploading artifacts
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt install -y python3 python3-numpy
+
+      - name: Run the build script
+        run: |
+          python3 scripts/eeprom.py
+
+      - name: Update the nightly release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            joystick-eeprom.bin
+          tag_name: nightly
+          release_name: Nightly Build
+          overwrite: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

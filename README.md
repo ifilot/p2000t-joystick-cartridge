@@ -1,5 +1,6 @@
 # P2000T Joystick Cartridge for SLOT2
 
+[![Nightly Build](https://github.com/ifilot/p2000t-joystick-cartridge/actions/workflows/nightly-build.yml/badge.svg)](https://github.com/ifilot/p2000t-joystick-cartridge/actions/workflows/nightly-build.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![License: CC-BY-SA v4](https://img.shields.io/badge/license-CC--4.0--BY--SA-lightgrey)](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
 [![discord](https://img.shields.io/discord/1167925678868541451?logo=discord&logoColor=white)](https://discord.gg/YtzJTWYAxy)
@@ -8,6 +9,9 @@ This cartridge enables the use of Atari 2600-style joysticks with the P2000T by
 emulating keyboard inputs. It uses an EEPROM and a few logic chips to translate
 joystick button presses into keystrokes, seamlessly integrating with the
 P2000T's keyboard polling process.
+
+> [!TIP]
+> Download a copy of the EEPROM binary [via this link](https://github.com/ifilot/p2000t-joystick-cartridge/releases/download/nightly/joystick_eeprom.bin).
 
 ## PCB
 

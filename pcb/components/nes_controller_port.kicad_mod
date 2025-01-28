@@ -1,0 +1,274 @@
+(footprint "nes_controller_port"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -10.25 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "4d7ca014-71f0-430c-86b6-abc7f31c61db")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "NES controller port"
+		(at 0 6.75 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "9f53a434-c329-4551-913d-afff341587e3")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" "nes_controller_port"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "98362828-f249-4294-a985-0a724cb952c0")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "df3bc599-f708-493f-8d35-4f941359558f")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ba587c17-623d-4566-a12b-97afecd89203")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -8 -4.25)
+		(end -8 0.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "321afb59-6241-48dd-9fe6-ddb2e5c3ed53")
+	)
+	(fp_line
+		(start -8 -4.25)
+		(end -7.6 -4.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "bb023ed9-5102-487e-a31b-244f5048a23d")
+	)
+	(fp_line
+		(start -3.41 -4.25)
+		(end -5.05 -4.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1d56e398-2f0a-4467-8bea-524aa02a9d14")
+	)
+	(fp_line
+		(start 0.78 -4.25)
+		(end -0.86 -4.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "584494cd-777a-475a-b77f-aa892fe18b46")
+	)
+	(fp_line
+		(start 4.97 -4.25)
+		(end 3.33 -4.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "20256d6e-64f3-47b4-9c9e-df4df36b6a23")
+	)
+	(fp_line
+		(start 8 -4.25)
+		(end 7.53 -4.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "e2a26dfe-3af7-4ddd-91d2-ae9915b1bf4c")
+	)
+	(fp_line
+		(start 8 0.25)
+		(end 8 -4.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6fcc1866-0da5-4533-9464-bc3762214f54")
+	)
+	(fp_rect
+		(start -12.5 10.95)
+		(end -14.913 8.85)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "9cd0437f-ad0a-4a2f-b33c-c39e12a82511")
+	)
+	(fp_rect
+		(start 12.4 14.25)
+		(end -12.4 0.25)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "d623536a-156c-40a0-969e-6eefb9ca89a3")
+	)
+	(fp_rect
+		(start 14.9565 10.95)
+		(end 12.5435 8.85)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(fill none)
+		(layer "F.SilkS")
+		(uuid "ec3164be-fa8f-4625-92bb-195852ae0cca")
+	)
+	(fp_rect
+		(start -15.25 14.5)
+		(end 15.25 -8.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill none)
+		(layer "F.CrtYd")
+		(uuid "062bccdc-d4d3-4e66-b749-433747ab0932")
+	)
+	(fp_text user "${REFERENCE}"
+		(at -10.25 -0.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "6bbd1d74-c492-4fa6-8064-1c832df49af2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "" np_thru_hole oval
+		(at -10.25 7.25)
+		(size 3.9 4.2)
+		(drill oval 3.9 4.2)
+		(layers "F&B.Cu" "*.Mask")
+		(uuid "56446181-44a4-42a2-8365-c75fdf7d5bcb")
+	)
+	(pad "" np_thru_hole oval
+		(at 10.25 7.25)
+		(size 3.9 4.2)
+		(drill oval 3.9 4.2)
+		(layers "F&B.Cu" "*.Mask")
+		(uuid "bbf702fe-df18-4aaf-b8a0-bf7fcb2c6107")
+	)
+	(pad "1" thru_hole circle
+		(at 6.25 -5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "021e32ed-3984-47b4-bd28-393a2f9be824")
+	)
+	(pad "2" thru_hole circle
+		(at 2.057 -5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "46229fc1-7947-4f06-a5ab-6d862d4e7a40")
+	)
+	(pad "3" thru_hole circle
+		(at -2.134 -5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "f5b5be23-5aed-4da0-8d78-f984a845dd53")
+	)
+	(pad "4" thru_hole circle
+		(at -6.325 -5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "19fc7d5a-9e57-4a4a-bdf7-b22b8d951f05")
+	)
+	(pad "5" thru_hole circle
+		(at -6.325 -1.5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "386d4893-c1ee-461c-88f4-6ec608d353de")
+	)
+	(pad "6" thru_hole circle
+		(at -2.134 -1.5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "c62a596c-f240-4140-9429-88a29b4e2368")
+	)
+	(pad "7" thru_hole circle
+		(at 2.057 -1.5)
+		(size 2.7 2.7)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "e6b92f93-09e7-470c-a5b9-dcdbf798ca12")
+	)
+	(model "${TEST}/nes_connector v1.step"
+		(offset
+			(xyz 0 0.5 7.5)
+		)
+		(scale
+			(xyz 2.28723404 2.28723404 2.28723404)
+		)
+		(rotate
+			(xyz -90 0 0)
+		)
+	)
+)

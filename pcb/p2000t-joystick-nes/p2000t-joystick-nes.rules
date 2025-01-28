@@ -1,0 +1,85 @@
+
+(rules PCB p2000t-joystick-slot2-eeprom
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 4595)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.2)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.8)
+    )
+  )
+  (rule
+    (width 200.0)
+    (clear 200.0)
+    (clear 100.0 (type smd_to_turn_gap))
+    (clear 50.0 (type smd_smd))
+  )
+  (padstack "Via[0-1]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:300_um" "Via[0-1]_600:300_um" default
+  )
+  (via 
+    "Via[0-1]_600:300_um-kicad_default" "Via[0-1]_600:300_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:300_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    "Net-(D9-K)" "unconnected-(J1-PAD-Pad0)" GND VCC "unconnected-(J1-PAD-Pad0)_0" "~{P1_FIRE}" "~{P1_UP}" "~{P1_LEFT}"
+    "~{P1_DOWN}" "~{P1_RIGHT}" "~{P2_RIGHT}" "~{P2_FIRE}" "~{P2_UP}" "~{P2_DOWN}" A7 D4
+    D5 ~{RD} A4 D6 A5 D2 D0 A0
+    D7 A6 D3 A3 ~{IORQ} A2 A1 D1
+    "unconnected-(J1-NC-Pad7)" "Net-(D1-K)" "Net-(D2-K)" "Net-(D3-K)" "Net-(D4-K)" "Net-(D5-K)" "Net-(D6-K)" "Net-(D7-K)"
+    "Net-(D8-K)" DIP2 DIP1 "~{P2_LEFT}" "unconnected-(J2-Pin_12a-Pad12a)" ~{WR} "unconnected-(J2-Pin_1a-Pad1a)" "unconnected-(J2-Pin_10b-Pad10b)"
+    "unconnected-(J2-Pin_11b-Pad11b)" "unconnected-(J3-PAD-Pad0)" "unconnected-(J3-PAD-Pad0)_0" "unconnected-(J3-NC-Pad7)" "Net-(U3-~{Y1})" "Net-(U4-OE)" "Net-(U3-~{Y0})" "Net-(U1-Pad4)"
+    "Net-(U2A-C)" "Net-(U3-E2)" "unconnected-(U2B-Q-Pad9)" KBIEN "unconnected-(U2A-~{Q}-Pad6)" "unconnected-(U2B-~{Q}-Pad8)" "unconnected-(U3-~{Y4}-Pad11)" "unconnected-(U3-~{Y3}-Pad12)"
+    "unconnected-(U3-~{Y5}-Pad10)" "unconnected-(U3-~{Y7}-Pad7)" "unconnected-(U3-~{Y6}-Pad9)" "unconnected-(U3-~{Y2}-Pad13)" "Net-(D10-K)" "Net-(D11-K)" "Net-(D12-K)" "Net-(D13-K)"
+    "Net-(D14-K)" "Net-(D15-K)" "Net-(D16-K)" "Net-(D17-K)" "Net-(D18-K)" "Net-(D19-A)"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)

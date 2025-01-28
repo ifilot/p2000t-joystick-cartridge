@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "components")(type "KiCad")(uri "D:/PROGRAMMING/P2000T/p2000t-joystick/pcb/components")(options "")(descr ""))
+)

@@ -11324,7 +11324,7 @@
 				)
 			)
 		)
-		(property "Value" "74LS08"
+		(property "Value" "74HC08"
 			(at 106.6717 210.82 0)
 			(effects
 				(font
@@ -12844,7 +12844,7 @@
 				)
 			)
 		)
-		(property "Value" "74LS08"
+		(property "Value" "74HC08"
 			(at 118.1017 184.15 0)
 			(effects
 				(font
@@ -13628,7 +13628,7 @@
 				)
 			)
 		)
-		(property "Value" "74LS08"
+		(property "Value" "74HC08"
 			(at 100.3217 171.45 0)
 			(effects
 				(font
@@ -15876,7 +15876,7 @@
 				)
 			)
 		)
-		(property "Value" "74LS08"
+		(property "Value" "74HC08"
 			(at 100.3217 186.69 0)
 			(effects
 				(font
@@ -17000,7 +17000,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74LS595"
+		(property "Value" "74HC595"
 			(at 234.6041 200.66 0)
 			(effects
 				(font
@@ -18749,7 +18749,7 @@
 				)
 			)
 		)
-		(property "Value" "74LS08"
+		(property "Value" "74HC08"
 			(at 133.35 209.55 90)
 			(effects
 				(font
@@ -20404,7 +20404,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74LS193"
+		(property "Value" "74HC193"
 			(at 70.7741 177.8 0)
 			(effects
 				(font
@@ -20838,7 +20838,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "74LS595"
+		(property "Value" "74HC595"
 			(at 234.6041 149.86 0)
 			(effects
 				(font

@@ -22,16 +22,16 @@ PIN 11 = A5;        /* Address bit 5 */
 PIN 12 = A6;        /* Address bit 6 */
 PIN 14 = A7;        /* Address bit 7 */
 
-PIN 24 = D0;        /* Data bit 0 */
-PIN 25 = D1;        /* Data bit 1 */
-PIN 26 = D2;        /* Data bit 2 */
-PIN 27 = D3;        /* Data bit 3 */
-PIN 28 = D4;        /* Data bit 4 */
-PIN 29 = D5;        /* Data bit 5 */
-PIN 31 = D6;        /* Data bit 6 */
-PIN 33 = D7;        /* Data bit 7 */
+PIN 33 = D0;        /* Data bit 0 */
+PIN 31 = D1;        /* Data bit 1 */
+PIN 29 = D2;        /* Data bit 2 */
+PIN 28 = D3;        /* Data bit 3 */
+PIN 27 = D4;        /* Data bit 4 */
+PIN 26 = D5;        /* Data bit 5 */
+PIN 25 = D6;        /* Data bit 6 */
+PIN 24 = D7;        /* Data bit 7 */
 
-PIN 34 = IORQ;      /* I/O Request (input) */
+PIN 34 = IORQ_N;    /* I/O Request (input) */
 PIN  1 = RD_N;      /* Read (input) */
 PIN  2 = WR_N;      /* Write (input) */
 
@@ -47,10 +47,10 @@ PIN 17 = JOY2_B0;   /* Joystick 2 Button 0 */
 PIN 18 = JOY2_B1;   /* Joystick 2 Button 1 */
 PIN 19 = JOY2_B2;   /* Joystick 2 Button 2 */
 PIN 20 = JOY2_B3;   /* Joystick 2 Button 3 */
-PIN 21 = JOY2_B4;   /* Joystick 2 Button 4 - JTAG TDI (avoid using JTAG) */
+PIN 21 = JOY2_B4;   /* Joystick 2 Button 4 */
 
-/* Data bus is enabled for an /IORQ and /RD_N below 0x10 */
-DOUT = !A4 & !A5 & !A6 & !A7 & !IORQ & !RD_N;
+/* Data bus is enabled for an /IORQ_N and /RD_N below 0x10 */
+DOUT = !A4 & !A5 & !A6 & !A7 & !IORQ_N & !RD_N;
 D0.oe = DOUT;
 D1.oe = DOUT;
 D2.oe = DOUT;
@@ -62,8 +62,8 @@ D7.oe = DOUT;
 
  /* Store whether keyboard is in polling mode */
 Pinnode = KBIEN;
-KBIEN.ck = !WR_N & !A5 & !A6 & !A7 & A4;
-KBIEN.t = D6;
+KBIEN.ck = !WR_N & A4 & !A5 & !A6 & !A7;
+KBIEN.d = D6;
 
 /* generalized joystick addresses */
 Pinnode = JOY_ADDR_0;
@@ -73,9 +73,9 @@ Pinnode = JOY_ADDR_7;
 Pinnode = JOY_ADDR_8;
 JOY_ADDR_0 = !A3 & !A2 & !A1 & !A0;            /* Address 0x00 */
 JOY_ADDR_2 = !A3 & !A2 &  A1 & !A0;            /* Address 0x02 */
-JOY_ADDR_6 =  A3 & !A2 &  A1 & !A0;            /* Address 0x06 */
-JOY_ADDR_7 =  A3 & !A2 &  A1 &  A0;            /* Address 0x07 */
-JOY_ADDR_8 =  A3 &  A2 & !A1 & !A0;            /* Address 0x08 */
+JOY_ADDR_6 = !A3 &  A2 &  A1 & !A0;            /* Address 0x06 */
+JOY_ADDR_7 = !A3 &  A2 &  A1 &  A0;            /* Address 0x07 */
+JOY_ADDR_8 =  A3 & !A2 & !A1 & !A0;            /* Address 0x08 */
 
 /* -------------------------------------------------------------------
  * Joystick Button to Data Bus Mapping
@@ -93,43 +93,43 @@ JOY_ADDR_8 =  A3 &  A2 & !A1 & !A0;            /* Address 0x08 */
  *  8  | P2_RIGHT    | JOY2_B3    | 0x08 | D0    | NUM6
  *  9  | P2_FIRE     | JOY2_B4    | 0x02 | D3    | NUM0
  * -------------------------------------------------------------------
- * Logic applies when (ADDR matches & !KBIEN & button high) 
- * OR (KBIEN & button high)
+ * Logic applies when (ADDR matches & !KBIEN & button LOW) 
+ * OR (KBIEN & button LOW)
  * Output bit will be pulled LOW (active) when matched
  * ------------------------------------------------------------------- */
 
 /* D0: P1_LEFT (0x00) or P2_RIGHT (0x08) */
 D0 = !(
-    (JOY_ADDR_0 & !KBIEN & JOY1_B2) # (KBIEN & JOY1_B2)    /* P1_LEFT  */
-  # (JOY_ADDR_8 & !KBIEN & JOY2_B3) # (KBIEN & JOY2_B3)    /* P2_RIGHT */
+    (JOY_ADDR_0 & !KBIEN & !JOY1_B2) # (KBIEN & !JOY1_B2)    /* P1_LEFT  */
+  # (JOY_ADDR_8 & !KBIEN & !JOY2_B3) # (KBIEN & !JOY2_B3)    /* P2_RIGHT */
 );
 
 /* D1: P1_FIRE only (0x02) */
 D1 = !(
-    (JOY_ADDR_2 & !KBIEN & JOY1_B4) # (KBIEN & JOY1_B4)    /* P1_FIRE */
+    (JOY_ADDR_2 & !KBIEN & !JOY1_B4) # (KBIEN & !JOY1_B4)    /* P1_FIRE */
 );
 
 /* D2: P1_UP (0x00), P2_UP (0x06), P2_DOWN (0x07) */
 D2 = !(
-    (JOY_ADDR_0 & !KBIEN & JOY1_B0) # (KBIEN & JOY1_B0)    /* P1_UP    */
-  # (JOY_ADDR_6 & !KBIEN & JOY2_B0) # (KBIEN & JOY2_B0)    /* P2_UP    */
-  # (JOY_ADDR_7 & !KBIEN & JOY2_B1) # (KBIEN & JOY2_B1)    /* P2_DOWN  */
+    (JOY_ADDR_0 & !KBIEN & !JOY1_B0) # (KBIEN & !JOY1_B0)    /* P1_UP    */
+  # (JOY_ADDR_6 & !KBIEN & !JOY2_B0) # (KBIEN & !JOY2_B0)    /* P2_UP    */
+  # (JOY_ADDR_7 & !KBIEN & !JOY2_B1) # (KBIEN & !JOY2_B1)    /* P2_DOWN  */
 );
 
 /* D3: P2_LEFT (0x08) and P2_FIRE (0x02) */
 D3 = !(
-    (JOY_ADDR_8 & !KBIEN & JOY2_B2) # (KBIEN & JOY2_B2)    /* P2_LEFT  */
-  # (JOY_ADDR_2 & !KBIEN & JOY2_B4) # (KBIEN & JOY2_B4)    /* P2_FIRE  */
+    (JOY_ADDR_8 & !KBIEN & !JOY2_B2) # (KBIEN & !JOY2_B2)    /* P2_LEFT  */
+  # (JOY_ADDR_2 & !KBIEN & !JOY2_B4) # (KBIEN & !JOY2_B4)    /* P2_FIRE  */
 );
 
 /* D5: P1_DOWN only (0x02) */
 D5 = !(
-    (JOY_ADDR_2 & !KBIEN & JOY1_B1) # (KBIEN & JOY1_B1)    /* P1_DOWN */
+    (JOY_ADDR_2 & !KBIEN & !JOY1_B1) # (KBIEN & !JOY1_B1)    /* P1_DOWN */
 );
 
 /* D7: P1_RIGHT only (0x02) */
 D7 = !(
-    (JOY_ADDR_2 & !KBIEN & JOY1_B3) # (KBIEN & JOY1_B3)    /* P1_RIGHT */
+    (JOY_ADDR_2 & !KBIEN & !JOY1_B3) # (KBIEN & !JOY1_B3)    /* P1_RIGHT */
 );
 
 D4 = 'b'1;  /* Not used - always high */

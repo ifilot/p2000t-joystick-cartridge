@@ -158,7 +158,7 @@ def build_mapping_rom(mapping):
                 val &= ~(1 << col)   # mask the data pin (cols are active low)
 
         data[j | KBIEN] = val
-    
+
     return data
 
 def build_reverse_lookup_table():

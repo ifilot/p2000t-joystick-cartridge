@@ -12,7 +12,9 @@ PROPERTY ATMEL {POWER_RESET = OFF};
 PROPERTY ATMEL {PIN_KEEP = ON};
 PROPERTY ATMEL {PREASSIGN = KEEP};
 
-/* Define Inputs and Outputs for Z80-style bus interface */
+/*---------------------------------------------------------------------*/
+/* Define Inputs and Outputs for Z80-style bus interface               */
+/*---------------------------------------------------------------------*/
 PIN 4  = A0;        /* Address bit 0 */
 PIN 5  = A1;        /* Address bit 1 */
 PIN 6  = A2;        /* Address bit 2 */
@@ -31,47 +33,36 @@ PIN 26 = D5;        /* Data bit 5 */
 PIN 25 = D6;        /* Data bit 6 */
 PIN 24 = D7;        /* Data bit 7 */
 
-PIN 34 = IORQ_N;    /* I/O Request (input) */
-PIN  1 = RD_N;      /* Read (input) */
-PIN  2 = WR_N;      /* Write (input) */
+PIN 34 = IORQ_N;    /* I/O Request (input)  */
+PIN  1 = RD_N;      /* Read (input)         */
+PIN  2 = WR_N;      /* Write (input)        */
+PIN 16 = D6IN;      /* BIT6 (KBIEN bit)     */
 
-/* Define Inputs for JOY1 (Joystick 1) */
-PIN 41 = JOY1_B0;   /* Joystick 1 Button 0 */
-PIN 40 = JOY1_B1;   /* Joystick 1 Button 1 */
-PIN 39 = JOY1_B2;   /* Joystick 1 Button 2 */
-PIN 37 = JOY1_B3;   /* Joystick 1 Button 3 */
-PIN 36 = JOY1_B4;   /* Joystick 1 Button 4 */
+/* Define Inputs for JOY1 (Joystick 1)      */
+PIN 41 = JOY1_UP;   /* Joystick 1 Button 0  */
+PIN 40 = JOY1_DN;   /* Joystick 1 Button 1  */
+PIN 39 = JOY1_LF;   /* Joystick 1 Button 2  */
+PIN 37 = JOY1_RG;   /* Joystick 1 Button 3  */
+PIN 36 = JOY1_FR;   /* Joystick 1 Button 4  */
 
 /* Define Inputs for JOY2 (Joystick 2) */
-PIN 17 = JOY2_B0;   /* Joystick 2 Button 0 */
-PIN 18 = JOY2_B1;   /* Joystick 2 Button 1 */
-PIN 19 = JOY2_B2;   /* Joystick 2 Button 2 */
-PIN 20 = JOY2_B3;   /* Joystick 2 Button 3 */
-PIN 21 = JOY2_B4;   /* Joystick 2 Button 4 */
+PIN 17 = JOY2_B0;   /* Joystick 2 Button 0  */
+PIN 18 = JOY2_B1;   /* Joystick 2 Button 1  */
+PIN 19 = JOY2_B2;   /* Joystick 2 Button 2  */
+PIN 20 = JOY2_B3;   /* Joystick 2 Button 3  */
+PIN 21 = JOY2_B4;   /* Joystick 2 Button 4  */
 
 /* Data bus is enabled for an /IORQ_N and /RD_N below 0x10 */
-DOUT = !A4 & !A5 & !A6 & !A7 & !IORQ_N & !RD_N;
-D0.oe = DOUT;
-D1.oe = DOUT;
-D2.oe = DOUT;
-D3.oe = DOUT;
-D4.oe = DOUT;
-D5.oe = DOUT;
-D6.oe = DOUT;
-D7.oe = DOUT;
+[D7..D0].oe = !A4 & !A5 & !A6 & !A7 & !IORQ_N & !RD_N;
 
- /* Store whether keyboard is in polling mode */
+ /* Store whether keyboard is in polling mode (write to 0x1X) */
 Pinnode = KBIEN;
-KBIEN.ck = !WR_N & A4 & !A5 & !A6 & !A7;
-KBIEN.d = D6;
+KBIEN.ck = !IORQ_N & !WR_N & A4 & !A5 & !A6 & !A7;
+KBIEN.d =  D6IN;    /* cannot use D6 because it is behind a diode */
 
 /* generalized joystick addresses */
-Pinnode = JOY_ADDR_0;
-Pinnode = JOY_ADDR_2;
-Pinnode = JOY_ADDR_6;
-Pinnode = JOY_ADDR_7;
-Pinnode = JOY_ADDR_8;
 JOY_ADDR_0 = !A3 & !A2 & !A1 & !A0;            /* Address 0x00 */
+JOY_ADDR_1 = !A3 & !A2 & !A1 &  A0;            /* Address 0x01 */
 JOY_ADDR_2 = !A3 & !A2 &  A1 & !A0;            /* Address 0x02 */
 JOY_ADDR_6 = !A3 &  A2 &  A1 & !A0;            /* Address 0x06 */
 JOY_ADDR_7 = !A3 &  A2 &  A1 &  A0;            /* Address 0x07 */
@@ -82,11 +73,11 @@ JOY_ADDR_8 =  A3 & !A2 & !A1 & !A0;            /* Address 0x08 */
  * -------------------------------------------------------------------
  *  ID | Button      | Source     | Addr | D-Bit | Key Label
  * ----|-------------|------------|------|-------|-----------
- *  0  | P1_UP       | JOY1_B0    | 0x00 | D2    | UP
- *  1  | P1_DOWN     | JOY1_B1    | 0x02 | D5    | DOWN
- *  2  | P1_LEFT     | JOY1_B2    | 0x00 | D0    | LEFT
- *  3  | P1_RIGHT    | JOY1_B3    | 0x02 | D7    | RIGHT
- *  4  | P1_FIRE     | JOY1_B4    | 0x02 | D1    | SPACE
+ *  0  | P1_UP       | JOY1_UP    | 0x00 | D2    | UP
+ *  1  | P1_DOWN     | JOY1_DN    | 0x02 | D5    | DOWN
+ *  2  | P1_LEFT     | JOY1_LF    | 0x00 | D0    | LEFT
+ *  3  | P1_RIGHT    | JOY1_RG    | 0x02 | D7    | RIGHT
+ *  4  | P1_FIRE     | JOY1_FR    | 0x02 | D1    | SPACE
  *  5  | P2_UP       | JOY2_B0    | 0x06 | D2    | NUM8
  *  6  | P2_DOWN     | JOY2_B1    | 0x07 | D2    | NUM2
  *  7  | P2_LEFT     | JOY2_B2    | 0x08 | D3    | NUM4
@@ -100,18 +91,18 @@ JOY_ADDR_8 =  A3 & !A2 & !A1 & !A0;            /* Address 0x08 */
 
 /* D0: P1_LEFT (0x00) or P2_RIGHT (0x08) */
 D0 = !(
-    (JOY_ADDR_0 & !KBIEN & !JOY1_B2) # (KBIEN & !JOY1_B2)    /* P1_LEFT  */
+    (JOY_ADDR_0 & !KBIEN & !JOY1_LF) # (KBIEN & !JOY1_LF)    /* P1_LEFT  */
   # (JOY_ADDR_8 & !KBIEN & !JOY2_B3) # (KBIEN & !JOY2_B3)    /* P2_RIGHT */
 );
 
 /* D1: P1_FIRE only (0x02) */
 D1 = !(
-    (JOY_ADDR_2 & !KBIEN & !JOY1_B4) # (KBIEN & !JOY1_B4)    /* P1_FIRE */
+    (JOY_ADDR_2 & !KBIEN & !JOY1_FR) # (KBIEN & !JOY1_FR)    /* P1_FIRE */
 );
 
 /* D2: P1_UP (0x00), P2_UP (0x06), P2_DOWN (0x07) */
 D2 = !(
-    (JOY_ADDR_0 & !KBIEN & !JOY1_B0) # (KBIEN & !JOY1_B0)    /* P1_UP    */
+    (JOY_ADDR_0 & !KBIEN & !JOY1_UP) # (KBIEN & !JOY1_UP)    /* P1_UP    */
   # (JOY_ADDR_6 & !KBIEN & !JOY2_B0) # (KBIEN & !JOY2_B0)    /* P2_UP    */
   # (JOY_ADDR_7 & !KBIEN & !JOY2_B1) # (KBIEN & !JOY2_B1)    /* P2_DOWN  */
 );
@@ -124,13 +115,14 @@ D3 = !(
 
 /* D5: P1_DOWN only (0x02) */
 D5 = !(
-    (JOY_ADDR_2 & !KBIEN & !JOY1_B1) # (KBIEN & !JOY1_B1)    /* P1_DOWN */
+    (JOY_ADDR_2 & !KBIEN & !JOY1_DN) # (KBIEN & !JOY1_DN)    /* P1_DOWN */
 );
 
 /* D7: P1_RIGHT only (0x02) */
 D7 = !(
-    (JOY_ADDR_2 & !KBIEN & !JOY1_B3) # (KBIEN & !JOY1_B3)    /* P1_RIGHT */
+    (JOY_ADDR_2 & !KBIEN & !JOY1_RG) # (KBIEN & !JOY1_RG)    /* P1_RIGHT */
 );
 
+/* Set unused pins to high */
 D4 = 'b'1;  /* Not used - always high */
 D6 = 'b'1;  /* Not used - always high */
